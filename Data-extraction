@@ -1,0 +1,24 @@
+import csv
+import PyPDF2
+
+# Open the PDF file
+with open('input.pdf', 'rb') as file:
+    # Create a PDF reader object
+    pdf_reader = PyPDF2.PdfReader(file)
+
+    # Get the first page of the PDF
+    first_page = pdf_reader.pages[0]
+
+    # Extract the text from the page
+    extracted_text = first_page.extract_text()
+
+    # Split the extracted text into lines
+    lines = extracted_text.split('\n')
+
+    # Create a CSV file to write the extracted data
+    with open('output.csv', 'w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file)
+
+        # Iterate over the lines and write them to the CSV file
+        for line in lines:
+            csv_writer.writerow([line])
